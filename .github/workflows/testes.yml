@@ -36,6 +36,20 @@ jobs:
 
       - name: Roda os testes ate a aula declarada no arquivo AULA
         run: |
+          # Inicia o servidor em background e aguarda ate 15s pela porta 3000
+          npm start &
+
+          TIMEOUT=15
+          WAITED=0
+          until curl -sSf --connect-timeout 1 --max-time 2 http://localhost:3000/treinos >/dev/null 2>&1; do
+            if [ "$WAITED" -ge "$TIMEOUT" ]; then
+              echo "Erro: servidor nao respondeu em http://localhost:3000/treinos apos ${TIMEOUT}s"
+              exit 1
+            fi
+            sleep 1
+            WAITED=$((WAITED + 1))
+          done
+
           AULA=$(tr -d '[:space:]' < AULA)
           echo "Testando ate a aula $AULA"
           for n in $(seq 2 "$AULA"); do
