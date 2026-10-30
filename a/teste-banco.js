@@ -7,6 +7,10 @@ nome TEXT NOT NULL,
 duracao INTEGER NOT NULL
 )
 `);
-db.prepare('INSERT INTO treinos (nome, duracao) VALUES (?, ?)')
-.run('Teste de banco', 10);
-console.log(db.prepare('SELECT * FROM treinos').all());
+// dois usuarios de teste, so se a tabela estiver vazia
+const qtd = db.prepare('SELECT COUNT(*) AS n FROM usuarios').get().n;
+if (qtd === 0) {
+const ins = db.prepare('INSERT INTO usuarios (usuario, senha) VALUES (?, ?)');
+ins.run('diego', '1234');
+ins.run('aluno', 'senha');
+}
