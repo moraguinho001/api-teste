@@ -90,3 +90,26 @@ DELETE {{url}}/treinos/99999
 
 ### 12 - Listar de novo pra conferir       -> espera 200
 GET {{url}}/treinos
+
+
+### 13 - Fazer login                       -> espera 200 e Set-Cookie
+POST {{url}}/login
+Content-Type: application/json
+
+{
+    "usuario": "aluno",
+    "senha": "123456"
+}
+
+
+### 14 - Consultar o perfil logado         -> espera 200
+### O REST Client reenvia o cookie recebido no login.
+GET {{url}}/perfil
+
+
+### 15 - Encerrar a sessao                 -> espera 200 e limpa o cookie
+POST {{url}}/logout
+
+
+### 16 - Consultar o perfil deslogado      -> espera 401
+GET {{url}}/perfil
