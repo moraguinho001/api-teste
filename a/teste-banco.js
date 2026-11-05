@@ -13,4 +13,6 @@ if (qtd === 0) {
 const ins = db.prepare('INSERT INTO usuarios (usuario, senha) VALUES (?, ?)');
 ins.run('diego', '1234');
 ins.run('aluno', 'senha');
+  ins.run('mariane', '1233');
+ins.run('aluno', 'senha');
 }
