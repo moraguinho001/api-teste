@@ -36,6 +36,12 @@ jobs:
 
       - name: Roda os testes ate a aula declarada no arquivo AULA
         run: |
+          # Inicia o servidor em background para que os testes possam conectar em localhost:3000
+          npm start &
+
+          # dá um pequeno tempo para o servidor iniciar (ajuste se necessário)
+          sleep 1
+
           AULA=$(tr -d '[:space:]' < AULA)
           echo "Testando ate a aula $AULA"
           for n in $(seq 2 "$AULA"); do
