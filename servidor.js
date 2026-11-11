@@ -4,6 +4,7 @@ const authController = require('./controllers/authController.js');
 
 const app = express();
 app.use(express.json());
+app.use(express.static('public'));
 
 app.get('/treinos/total', controller.total);
 app.get('/treinos/resumo', controller.resumo);
